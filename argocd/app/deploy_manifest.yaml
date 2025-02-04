@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ctr-app
+  labels:
+    app: ctr-app
+spec:
+  replicas: 3
+  # define replicaSet
+  selector:
+    matchLabels:
+      app: ctr-app
+  # inside template we construct pods
+  template:
+    metadata:
+      name: ctr-app
+      labels:
+        app: ctr-app
+    spec:
+      containers:
+        - image: nickwild77/ctr_online_inference:main
+          name: ctr-app
+          ports:
+            - containerPort: 8000
+      imagePullSecrets:
+        - name: regcred
