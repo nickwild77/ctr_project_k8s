@@ -1,20 +1,22 @@
 # ctr_project_k8s
-k8s manifests
 
-# Основные команды
-```
+Kubernetes manifests.
+
+# Main Commands
+
+```bash
 kubectl create namespace argocd
 
-# install argocd and init password
+# Install Argo CD and retrieve the initial admin password
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 argocd admin initial-password -n argocd
 
-# forward ports and access argocd UI
+# Forward ports and access the Argo CD UI
 kubectl port-forward svc/argocd-server -n argocd 8080:443
 
-# run argocd app and deploy ctr_app
-kubectl apply -f app.yaml 
+# Create the Argo CD application and deploy ctr_app
+kubectl apply -f app.yaml
 
-# get external-ip address to send requests to ctr_app Service
+# Get the external IP address for sending requests to the ctr_app Service
 kubectl get services -n kuber
 ```
